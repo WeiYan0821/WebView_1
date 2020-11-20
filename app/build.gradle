@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.tw.android.webview_1"
+        minSdkVersion 15
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            //, mips, mips64...加入需要生成的文件夾
+        }
+
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            // signingConfig signingConfigs.release
+        }
+        release {
+            buildConfigField "boolean", "IS_DEBUG", "false"
+
+            //ProGuard
+            minifyEnabled true
+            //刪除無效的Resource
+            //shrinkResources依賴於minifyEnabled，必須和minifyEnabled一起用
+            shrinkResources true
+
+            // 代碼加密原則有兩個文件對，getDefaultProguardFile('proguard-android.txt')表示默認文件，
+            // 這個文件是sdk自帶的，有一些通用的配置；但是如果apk需要更加嚴格的加密，
+            // 我們可以在'proguard-rules.pro'文件中進行更加詳盡的配置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
+    implementation 'androidx.webkit:webkit:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    implementation 'com.github.hotchemi:permissionsdispatcher:3.1.0'
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.1.0"
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.jsoup:jsoup:1.13.1'
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'com.android.volley:volley:1.1.1'
+    
+}
