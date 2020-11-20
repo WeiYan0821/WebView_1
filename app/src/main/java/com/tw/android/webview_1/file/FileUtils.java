@@ -96,6 +96,7 @@ public class FileUtils {
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return pathHead + uri.getPath();
         }
+
 //        // 微信文件打開的uri
 ////        else if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
 ////            path = uri.getPath();
@@ -113,6 +114,7 @@ public class FileUtils {
 ////                return Environment.getExternalStorageDirectory() + "/" + paths[1];
 ////            }
 ////        }
+
         return null;
     }
     /**
