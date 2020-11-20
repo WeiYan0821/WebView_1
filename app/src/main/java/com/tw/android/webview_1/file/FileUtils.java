@@ -98,22 +98,22 @@ public class FileUtils {
         }
 
 //        // 微信文件打開的uri
-////        else if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
-////            path = uri.getPath();
-////            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && path != null && path.startsWith("/externsl")) {
-////                return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + path.replace("/external", "")).getPath();
-////            } else {
-////                String[] paths = uri.getPath().split("/0/");
-////                if (paths.length == 2) {
-////                    return Environment.getExternalStorageDirectory() + "/" + paths[1];
-////                }
-////            }
-////        } else {
-////            String[] paths = uri.getPath().split("/0/");
-////            if (path.length() == 2) {
-////                return Environment.getExternalStorageDirectory() + "/" + paths[1];
-////            }
-////        }
+//        else if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+//            path = uri.getPath();
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && path != null && path.startsWith("/externsl")) {
+//                return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + path.replace("/external", "")).getPath();
+//            } else {
+//                String[] paths = uri.getPath().split("/0/");
+//                if (paths.length == 2) {
+//                    return Environment.getExternalStorageDirectory() + "/" + paths[1];
+//                }
+//            }
+//        } else {
+//            String[] paths = uri.getPath().split("/0/");
+//            if (path.length() == 2) {
+//                return Environment.getExternalStorageDirectory() + "/" + paths[1];
+//            }
+//        }
 
         return null;
     }
