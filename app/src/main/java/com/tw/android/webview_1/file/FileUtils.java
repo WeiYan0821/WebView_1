@@ -1,6 +1,7 @@
 package com.tw.android.webview_1.file;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +35,7 @@ public class FileUtils {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         String pathHead = "file:///";
+//        String path = null;
 
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
@@ -93,6 +96,23 @@ public class FileUtils {
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return pathHead + uri.getPath();
         }
+//        // 微信文件打開的uri
+////        else if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+////            path = uri.getPath();
+////            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && path != null && path.startsWith("/externsl")) {
+////                return new File(Environment.getExternalStorageDirectory().getAbsolutePath() + path.replace("/external", "")).getPath();
+////            } else {
+////                String[] paths = uri.getPath().split("/0/");
+////                if (paths.length == 2) {
+////                    return Environment.getExternalStorageDirectory() + "/" + paths[1];
+////                }
+////            }
+////        } else {
+////            String[] paths = uri.getPath().split("/0/");
+////            if (path.length() == 2) {
+////                return Environment.getExternalStorageDirectory() + "/" + paths[1];
+////            }
+////        }
         return null;
     }
     /**
