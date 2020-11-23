@@ -1,11 +1,5 @@
 package com.tw.android.webview_1;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -40,6 +34,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 
 import com.tw.android.webview_1.file.FileUtils;
 
@@ -109,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
         // 若載入的 html 裡有JS 在執行動畫等操作，會造成資源浪費（CPU、電量）
         // 在 onStop 和 onResume 裡分別把 setJavaScriptEnabled() 給設定成 false 和 true 即可
 
+        webSettings.setBlockNetworkImage(false); // 解決圖片不顯示
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+
         // 開啟DOM storage API功能（HTML5 提供的一種標準的介面，主要將鍵值對儲存在本地，在頁面載入完畢後可以通過 JavaScript 來操作這些資料。
         webSettings.setDomStorageEnabled(true);
 
@@ -146,9 +151,18 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient( new  Browser_home());
         webView.setWebChromeClient( new MyChrome());
 
+        // 屏蔽WebView的长按事件
+        webView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
+
         loadWebsite();
         initProgressBar();
 //        clearCookies(this);
+
     }
 
     private void initProgressBar() {

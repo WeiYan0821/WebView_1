@@ -1,7 +1,5 @@
 package com.tw.android.webview_1.file;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;

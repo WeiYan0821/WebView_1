@@ -1,7 +1,6 @@
 package com.tw.android.webview_1.file;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,11 +13,9 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Currency;
 
 public class FileUtils {
     /**
