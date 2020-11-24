@@ -2,6 +2,7 @@ package com.tw.android.webview_1;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -109,10 +110,15 @@ public class MainActivity extends AppCompatActivity {
         // 若載入的 html 裡有JS 在執行動畫等操作，會造成資源浪費（CPU、電量）
         // 在 onStop 和 onResume 裡分別把 setJavaScriptEnabled() 給設定成 false 和 true 即可
 
+        removeJavascriptInterfaces(webView);
+
         webSettings.setBlockNetworkImage(false); // 解決圖片不顯示
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
+
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setDatabaseEnabled(true);
 
         // 開啟DOM storage API功能（HTML5 提供的一種標準的介面，主要將鍵值對儲存在本地，在頁面載入完畢後可以通過 JavaScript 來操作這些資料。
         webSettings.setDomStorageEnabled(true);
@@ -165,6 +171,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @TargetApi(11)
+    private static final void removeJavascriptInterfaces(WebView webView) {
+        try {
+            if (Build.VERSION.SDK_INT >= 11 && Build.VERSION.SDK_INT < 17) {
+                webView.removeJavascriptInterface("searchBoxJavaBridge_");
+                webView.removeJavascriptInterface("accessibility");
+                webView.removeJavascriptInterface("accessibilityTraversal");
+            }
+        } catch (Throwable tr) {
+            tr.printStackTrace();
+        }
+    }
+
     private void initProgressBar() {
         mProgressBar.setMax(100);
     }
@@ -188,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
 //        webView.loadUrl("http://supreme178.com/"); //正式
         webView.loadUrl("http://space.rd-show.com/"); // 測試
 //        webView.loadUrl("http://slot.club.tw/"); // 京站
+        webView.loadUrl("");
     }
 
     private class Browser_home extends WebViewClient {
