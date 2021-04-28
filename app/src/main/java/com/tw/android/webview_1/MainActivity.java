@@ -204,10 +204,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadWebsite() {
-//        webView.loadUrl("http://supreme178.com/"); //正式
-        webView.loadUrl("http://space.rd-show.com/"); // 測試
-//        webView.loadUrl("http://slot.club.tw/"); // 京站
-        webView.loadUrl("");
+        webView.loadUrl("網址");
     }
 
     private class Browser_home extends WebViewClient {
